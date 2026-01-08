@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>驰骋雅加达 - 专业租车与司乘服务</title>
+    <title>驰骋雅加达 (PT. WAYAN SEMANGAT INDONESIA) - 专业租车与司乘服务</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入图标库 -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -27,6 +27,60 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        /* 微信二维码弹出样式 */
+        .wechat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .wechat-modal.active {
+            display: flex;
+        }
+        .wechat-qr-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 2rem;
+            text-align: center;
+            max-width: 90%;
+            max-height: 90%;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 电话号码样式 */
+        .phone-number {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .phone-number:hover {
+            color: #f97316;
+            transform: scale(1.02);
+        }
+        .copy-success {
+            position: absolute;
+            background: #10b981;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            transform: translateY(-100%);
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-80%); }
+            to { opacity: 1; transform: translateY(-100%); }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-slate-900">
@@ -45,7 +99,8 @@
                 <a href="#services" class="hover:text-orange-600 transition-colors">核心服务</a>
                 <a href="#contact" class="hover:text-orange-600 transition-colors">预约咨询</a>
             </div>
-            <a href="https://wa.me/6281286965630" target="_blank" class="bg-orange-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-orange-700 transition-all">
+            <!-- 修复导航栏链接 -->
+            <a href="https://wa.me/6281286965630?text=你好，我想咨询在雅加达的租车服务" target="_blank" class="bg-orange-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-orange-700 transition-all">
                 立即咨询
             </a>
         </div>
@@ -120,7 +175,7 @@
                             <span class="text-slate-400 text-[10px] uppercase font-bold tracking-widest">专属定制</span>
                             <span class="text-xl font-black text-slate-800 underline decoration-orange-400">欢迎询价</span>
                         </div>
-                        <a href="https://wa.me/6281286965630" class="p-3 bg-slate-900 text-white rounded-2xl hover:bg-orange-600 transition-colors">
+                        <a href="https://wa.me/6281286965630?text=你好，我想咨询丰田Alphard的租车服务" target="_blank" class="p-3 bg-slate-900 text-white rounded-2xl hover:bg-orange-600 transition-colors">
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -136,7 +191,7 @@
                 </div>
                 <div class="p-10 flex flex-col flex-grow">
                     <h3 class="text-3xl font-black text-slate-800 mb-2">丰田 Innova</h3>
-                    <p class="text-slate-400 text-sm font-medium mb-6">印尼路况的“国民神车”</p>
+                    <p class="text-slate-400 text-sm font-medium mb-6">印尼路况的"国民神车"</p>
                     
                     <div class="space-y-4 mb-8 text-slate-600">
                         <div class="flex items-center gap-3">
@@ -158,7 +213,7 @@
                             <span class="text-slate-400 text-[10px] uppercase font-bold tracking-widest">全包日租</span>
                             <span class="text-2xl font-black text-orange-600">CNY 380 <span class="text-xs font-normal text-slate-400">起</span></span>
                         </div>
-                        <a href="https://wa.me/6281286965630" class="p-4 bg-orange-600 text-white rounded-2xl hover:bg-orange-700 transition-all shadow-lg shadow-orange-200">
+                        <a href="https://wa.me/6281286965630?text=你好，我想预订丰田Innova租车服务" target="_blank" class="p-4 bg-orange-600 text-white rounded-2xl hover:bg-orange-700 transition-all shadow-lg shadow-orange-200">
                             预订
                         </a>
                     </div>
@@ -195,7 +250,7 @@
                             <span class="text-slate-400 text-[10px] uppercase font-bold tracking-widest">全包日租</span>
                             <span class="text-2xl font-black text-slate-800">CNY 280 <span class="text-xs font-normal text-slate-400">起</span></span>
                         </div>
-                        <a href="https://wa.me/6281286965630" class="p-3 bg-slate-100 text-slate-600 rounded-2xl hover:bg-slate-200 transition-colors">
+                        <a href="https://wa.me/6281286965630?text=你好，我想咨询丰田Avanza的租车服务" target="_blank" class="p-3 bg-slate-100 text-slate-600 rounded-2xl hover:bg-slate-200 transition-colors">
                             <i data-lucide="chevron-right"></i>
                         </a>
                     </div>
@@ -218,7 +273,7 @@
                         <i data-lucide="languages" class="text-orange-500 group-hover:text-white w-10 h-10"></i>
                     </div>
                     <h4 class="text-white font-bold text-xl mb-3">无障碍沟通</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">司机精通印尼语，并提供中/英多语种调度支持，沟通零距离。</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">司机熟悉路况，并提供中/英多语种调度支持，沟通零距离。</p>
                 </div>
                 
                 <div class="text-center group">
@@ -275,37 +330,128 @@
                         <div class="bg-gray-100 p-2 rounded-xl mt-1 text-slate-600">
                             <i data-lucide="phone-call" class="w-5 h-5"></i>
                         </div>
-                        <div>
+                        <div class="relative">
                             <p class="text-slate-400 text-xs font-bold uppercase mb-1">WhatsApp 24/7</p>
-                            <p class="text-slate-800 text-2xl font-black">+62 812-8696-5630</p>
+                            <p class="text-slate-800 text-2xl font-black phone-number" onclick="copyPhoneNumber('6281286965630')">
+                                +62 812-8696-5630
+                            </p>
+                            <div id="copy-success" class="copy-success hidden">
+                                已复制到剪贴板
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-4">
+                        <div class="bg-gray-100 p-2 rounded-xl mt-1 text-slate-600">
+                            <i data-lucide="message-square" class="w-5 h-5"></i>
+                        </div>
+                        <div class="relative">
+                            <p class="text-slate-400 text-xs font-bold uppercase mb-1">微信 WeChat</p>
+                            <p class="text-slate-800 text-lg font-bold phone-number" onclick="copyPhoneNumber('TAIBAINANLU')">
+                                TAIBAINANLU
+                            </p>
+                            <div class="flex gap-2 mt-2">
+                                <button onclick="openWechatModal('微信')" class="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-200 transition-colors">
+                                    查看二维码
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="flex-shrink-0 text-center z-10 w-full lg:w-auto">
-                <div class="bg-slate-50 p-6 rounded-[3rem] border-2 border-dashed border-gray-200 inline-block mb-8 group">
-                    <!-- 模拟二维码 -->
-                    <div class="w-48 h-48 bg-white rounded-2xl flex items-center justify-center relative overflow-hidden">
-                        <i data-lucide="qr-code" class="w-32 h-32 text-slate-200"></i>
-                        <div class="absolute inset-0 flex items-center justify-center bg-white/60 opacity-100">
-                            <span class="text-[10px] font-bold text-slate-400 px-4 text-center">长按扫码或点击下方按钮直接对话</span>
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <!-- WhatsApp 二维码 -->
+                    <div class="bg-slate-50 p-6 rounded-[2rem] border-2 border-dashed border-gray-200 inline-block group cursor-pointer hover:border-green-200 transition-all"
+                         onclick="openWechatModal('WhatsApp')">
+                        <div class="w-40 h-40 bg-white rounded-2xl flex items-center justify-center relative overflow-hidden mb-3">
+                            <i data-lucide="message-circle" class="w-20 h-20 text-green-200"></i>
+                            <div class="absolute inset-0 flex items-center justify-center bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[10px] font-bold text-slate-600 px-2 text-center">点击查看二维码</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center gap-2">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-green-500"></i>
+                            <span class="text-sm font-bold text-slate-700">WhatsApp</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 微信二维码 -->
+                    <div class="bg-slate-50 p-6 rounded-[2rem] border-2 border-dashed border-gray-200 inline-block group cursor-pointer hover:border-blue-200 transition-all"
+                         onclick="openWechatModal('微信')">
+                        <div class="w-40 h-40 bg-white rounded-2xl flex items-center justify-center relative overflow-hidden mb-3">
+                            <i data-lucide="message-square" class="w-20 h-20 text-blue-200"></i>
+                            <div class="absolute inset-0 flex items-center justify-center bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[10px] font-bold text-slate-600 px-2 text-center">点击查看二维码</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center gap-2">
+                            <i data-lucide="message-square" class="w-4 h-4 text-blue-500"></i>
+                            <span class="text-sm font-bold text-slate-700">微信 WeChat</span>
                         </div>
                     </div>
                 </div>
                 
-                <a href="https://wa.me/6281286965630?text=你好，我想咨询在雅加达的租车服务" target="_blank" class="flex items-center justify-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-[2rem] font-black text-lg shadow-xl shadow-green-200 hover:scale-105 hover:bg-[#20bd5a] transition-all w-full">
-                    <i data-lucide="message-circle"></i>
-                    WhatsApp 快速对话
-                </a>
+                <div class="flex flex-col gap-4">
+                    <a href="https://wa.me/6281286965630?text=你好，我想咨询在雅加达的租车服务" target="_blank" class="flex items-center justify-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-[2rem] font-black text-lg shadow-xl shadow-green-200 hover:scale-105 hover:bg-[#20bd5a] transition-all">
+                        <i data-lucide="message-circle"></i>
+                        WhatsApp 快速对话
+                    </a>
+                    <button onclick="openWechatModal('微信')" class="flex items-center justify-center gap-3 bg-[#07C160] text-white px-10 py-5 rounded-[2rem] font-black text-lg shadow-xl shadow-blue-200 hover:scale-105 hover:bg-[#06b057] transition-all">
+                        <i data-lucide="message-square"></i>
+                        微信咨询
+                    </button>
+                </div>
             </div>
         </div>
         
         <div class="mt-20 text-center border-t border-gray-100 pt-10">
-            <p class="text-slate-400 text-sm">© 2024 驰骋雅加达 (Chauffeur Jakarta). All rights reserved.</p>
+            <p class="text-slate-400 text-sm">© 2008 驰骋雅加达 (PT. WAYAN SEMANGAT INDONESIA). All rights reserved.</p>
             <p class="text-slate-300 text-xs mt-2 italic">Terima Kasih! 愿我们在千岛之国为您创造美好的回忆。</p>
         </div>
     </footer>
+
+    <!-- 微信/WhatsApp二维码弹出模态框 -->
+    <div id="wechatModal" class="wechat-modal">
+        <div class="wechat-qr-box">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-slate-800" id="modalTitle">微信二维码</h3>
+                <button onclick="closeWechatModal()" class="text-slate-400 hover:text-slate-800">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="mb-4">
+                <div class="w-64 h-64 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <!-- 二维码区域 -->
+                    <div class="relative">
+                        <div class="w-48 h-48 bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center">
+                            <div class="text-center">
+                                <i data-lucide="message-square" class="w-16 h-16 text-green-400 mb-2" id="qrIcon"></i>
+                                <p class="text-xs text-slate-500 font-medium" id="qrText">扫码添加微信</p>
+                                <p class="text-xs text-slate-400" id="qrId">微信号: TAIBAINANLU</p>
+                            </div>
+                        </div>
+                        <!-- 模拟二维码图案 -->
+                        <div class="absolute top-4 left-4 w-6 h-6 bg-black rounded"></div>
+                        <div class="absolute top-4 right-4 w-6 h-6 bg-black rounded"></div>
+                        <div class="absolute bottom-4 left-4 w-6 h-6 bg-black rounded"></div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600 mb-2" id="qrInstruction">打开微信扫一扫，添加客服微信</p>
+                <p class="text-xs text-slate-400" id="qrNumber">微信号: <span class="font-bold">TAIBAINANLU</span></p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="closeWechatModal()" class="flex-1 py-3 border border-gray-300 text-slate-700 rounded-xl hover:bg-gray-50 transition-colors">
+                    关闭
+                </button>
+                <button onclick="copyWechatId()" class="flex-1 py-3 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                    复制号码
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // 初始化图标
@@ -321,6 +467,103 @@
                 nav.classList.remove('py-2', 'shadow-md');
                 nav.classList.add('py-4');
             }
+        });
+
+        // 复制电话号码功能
+        function copyPhoneNumber(number) {
+            navigator.clipboard.writeText(number).then(() => {
+                const successElement = document.getElementById('copy-success');
+                successElement.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    successElement.classList.add('hidden');
+                }, 2000);
+            }).catch(err => {
+                console.error('复制失败: ', err);
+                alert('复制失败，请手动复制：' + number);
+            });
+        }
+
+        // 微信/WhatsApp二维码模态框功能
+        let currentModalType = '微信';
+        let currentNumber = 'TAIBAINANLU';
+
+        function openWechatModal(type) {
+            const modal = document.getElementById('wechatModal');
+            const title = document.getElementById('modalTitle');
+            const qrIcon = document.getElementById('qrIcon');
+            const qrText = document.getElementById('qrText');
+            const qrId = document.getElementById('qrId');
+            const qrInstruction = document.getElementById('qrInstruction');
+            const qrNumber = document.getElementById('qrNumber');
+            
+            currentModalType = type;
+            
+            if (type === '微信') {
+                title.textContent = '微信二维码';
+                qrIcon.setAttribute('data-lucide', 'message-square');
+                lucide.createIcons();
+                qrText.textContent = '扫码添加微信';
+                qrId.textContent = '微信号: TAIBAINANLU';
+                qrInstruction.textContent = '打开微信扫一扫，添加客服微信';
+                qrNumber.innerHTML = '微信号: <span class="font-bold">TAIBAINANLU</span>';
+                currentNumber = 'TAIBAINANLU';
+            } else {
+                title.textContent = 'WhatsApp 二维码';
+                qrIcon.setAttribute('data-lucide', 'message-circle');
+                lucide.createIcons();
+                qrText.textContent = '扫码添加 WhatsApp';
+                qrId.textContent = '号码: +62 812-8696-5630';
+                qrInstruction.textContent = '打开 WhatsApp 扫一扫，添加客服';
+                qrNumber.innerHTML = '号码: <span class="font-bold">+62 812-8696-5630</span>';
+                currentNumber = '+6281286965630';
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeWechatModal() {
+            const modal = document.getElementById('wechatModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function copyWechatId() {
+            const numberToCopy = currentModalType === '微信' ? 'TAIBAINANLU' : '+6281286965630';
+            
+            navigator.clipboard.writeText(numberToCopy).then(() => {
+                alert(`${currentModalType}号码已复制到剪贴板`);
+            }).catch(err => {
+                console.error('复制失败: ', err);
+                alert(`复制失败，请手动复制：${numberToCopy}`);
+            });
+        }
+
+        // 点击模态框外部关闭
+        document.getElementById('wechatModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeWechatModal();
+            }
+        });
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeWechatModal();
+            }
+        });
+
+        // 修复所有WhatsApp链接
+        document.addEventListener('DOMContentLoaded', function() {
+            // 确保所有WhatsApp链接都正确编码
+            const whatsappLinks = document.querySelectorAll('a[href^="https://wa.me/"]');
+            whatsappLinks.forEach(link => {
+                if (!link.getAttribute('href').includes('text=')) {
+                    const baseUrl = link.getAttribute('href').split('?')[0];
+                    link.setAttribute('href', `${baseUrl}?text=你好，我想咨询在雅加达的租车服务`);
+                }
+            });
         });
     </script>
 </body>
