@@ -445,9 +445,8 @@
             </div>
             <div class="mb-4">
                 <div class="w-64 h-64 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <!-- 二维码图片区域 -->
                     <img id="modalQrImage" 
-                         src="https://i.ibb.co/HT19Gdby/wechat-qr.jpg" 
+                         src="https://i.ibb.co/HT19Gdby/wechat-qr.jpg"> 
                          alt="二维码" 
                          class="qr-image">
                 </div>
@@ -520,8 +519,7 @@
                 currentNumber = 'TAIBAINANLU';
             } else {
                 title.textContent = 'WhatsApp 二维码';
-                // 使用您提供的WhatsApp二维码图片地址
-                qrImage.src = 'https://i.ibb.co/W4TzvRBT/whatsapp-qr.jpg';
+                // qrImage.src = 'https://i.ibb.co/W4TzvRBT/whatsapp-qr.jpg';
                 qrImage.alt = 'WhatsApp二维码';
                 qrInstruction.textContent = '打开 WhatsApp 扫一扫，添加客服';
                 qrNumber.innerHTML = '号码: <span class="font-bold">+62 812-8696-5630</span>';
