@@ -98,6 +98,16 @@
             height: 100%;
             object-fit: contain;
         }
+        
+        /* 图片加载占位符 */
+        .img-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            color: #64748b;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-slate-900">
@@ -382,10 +392,18 @@
                     <div class="bg-slate-50 p-6 rounded-[2rem] border-2 border-dashed border-gray-200 inline-block group cursor-pointer hover:border-green-200 transition-all"
                          onclick="openWechatModal('WhatsApp')">
                         <div class="w-40 h-40 bg-white rounded-2xl flex items-center justify-center relative overflow-hidden mb-3">
-                            <!-- WhatsApp二维码图片 - 使用您提供的图片地址 -->
-                            <img src="https://i.ibb.co/W4TzvRBT/whatsapp-qr.jpg" 
+                            <!-- WhatsApp二维码图片 - 使用直接图片链接 -->
+                            <div id="whatsapp-qr-preview" class="img-placeholder w-full h-full rounded-2xl">
+                                <i data-lucide="message-circle" class="w-16 h-16 mb-2 text-green-400"></i>
+                                <span class="text-xs">WhatsApp二维码</span>
+                            </div>
+                            <!-- 实际图片（隐藏，通过JavaScript加载） -->
+                            <img id="whatsapp-qr-img" 
+                                 src="https://i.ibb.co/W4TzvRBT/whatsapp-qr.jpg" 
                                  alt="WhatsApp二维码" 
-                                 class="qr-preview">
+                                 class="qr-preview hidden"
+                                 onload="document.getElementById('whatsapp-qr-preview').style.display = 'none'; this.classList.remove('hidden')"
+                                 onerror="console.log('WhatsApp二维码加载失败')">
                             <div class="absolute inset-0 flex items-center justify-center bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <span class="text-[10px] font-bold text-slate-600 px-2 text-center">点击查看二维码</span>
                             </div>
@@ -400,10 +418,18 @@
                     <div class="bg-slate-50 p-6 rounded-[2rem] border-2 border-dashed border-gray-200 inline-block group cursor-pointer hover:border-blue-200 transition-all"
                          onclick="openWechatModal('微信')">
                         <div class="w-40 h-40 bg-white rounded-2xl flex items-center justify-center relative overflow-hidden mb-3">
-                            <!-- 微信二维码图片 - 使用您提供的图片地址 -->
-                            <img src="https://i.ibb.co/HT19Gdby/wechat-qr.jpg" 
+                            <!-- 微信二维码图片 - 使用直接图片链接 -->
+                            <div id="wechat-qr-preview" class="img-placeholder w-full h-full rounded-2xl">
+                                <i data-lucide="message-square" class="w-16 h-16 mb-2 text-blue-400"></i>
+                                <span class="text-xs">微信二维码</span>
+                            </div>
+                            <!-- 实际图片（隐藏，通过JavaScript加载） -->
+                            <img id="wechat-qr-img" 
+                                 src="https://i.ibb.co/HT19Gdby/wechat-qr.jpg" 
                                  alt="微信二维码" 
-                                 class="qr-preview">
+                                 class="qr-preview hidden"
+                                 onload="document.getElementById('wechat-qr-preview').style.display = 'none'; this.classList.remove('hidden')"
+                                 onerror="console.log('微信二维码加载失败')">
                             <div class="absolute inset-0 flex items-center justify-center bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <span class="text-[10px] font-bold text-slate-600 px-2 text-center">点击查看二维码</span>
                             </div>
@@ -446,10 +472,16 @@
             <div class="mb-4">
                 <div class="w-64 h-64 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <!-- 二维码图片区域 -->
+                    <div id="modal-qr-placeholder" class="img-placeholder w-48 h-48 rounded-xl">
+                        <i data-lucide="message-square" class="w-20 h-20 mb-3 text-green-400"></i>
+                        <span class="text-sm">正在加载二维码</span>
+                    </div>
                     <img id="modalQrImage" 
-                         src="https://i.ibb.co/HT19Gdby/wechat-qr.jpg" 
+                         src="" 
                          alt="二维码" 
-                         class="qr-image">
+                         class="qr-image hidden"
+                         onload="document.getElementById('modal-qr-placeholder').style.display = 'none'; this.classList.remove('hidden')"
+                         onerror="document.getElementById('modal-qr-placeholder').innerHTML = '<div class=\'text-center text-red-500\'><i data-lucide=\'alert-circle\' class=\'w-16 h-16 mb-2 mx-auto\'></i><span class=\'text-sm\'>二维码加载失败</span></div>'; lucide.createIcons();">
                 </div>
                 <p class="text-sm text-slate-600 mb-2" id="qrInstruction">打开微信扫一扫，添加客服微信</p>
                 <p class="text-xs text-slate-400" id="qrNumber">微信号: <span class="font-bold">TAIBAINANLU</span></p>
@@ -507,12 +539,17 @@
             const qrImage = document.getElementById('modalQrImage');
             const qrInstruction = document.getElementById('qrInstruction');
             const qrNumber = document.getElementById('qrNumber');
+            const qrPlaceholder = document.getElementById('modal-qr-placeholder');
             
             currentModalType = type;
             
+            // 显示占位符，隐藏图片
+            qrPlaceholder.style.display = 'flex';
+            qrImage.classList.add('hidden');
+            
             if (type === '微信') {
                 title.textContent = '微信二维码';
-                // 使用您提供的微信二维码图片地址
+                // 使用直接的微信二维码图片链接
                 qrImage.src = 'https://i.ibb.co/HT19Gdby/wechat-qr.jpg';
                 qrImage.alt = '微信二维码';
                 qrInstruction.textContent = '打开微信扫一扫，添加客服微信';
@@ -520,7 +557,7 @@
                 currentNumber = 'TAIBAINANLU';
             } else {
                 title.textContent = 'WhatsApp 二维码';
-                // 使用您提供的WhatsApp二维码图片地址
+                // 使用直接的WhatsApp二维码图片链接
                 qrImage.src = 'https://i.ibb.co/W4TzvRBT/whatsapp-qr.jpg';
                 qrImage.alt = 'WhatsApp二维码';
                 qrInstruction.textContent = '打开 WhatsApp 扫一扫，添加客服';
@@ -573,6 +610,13 @@
                     link.setAttribute('href', `${baseUrl}?text=你好，我想咨询在雅加达的租车服务`);
                 }
             });
+            
+            // 预加载二维码图片
+            const wechatImg = new Image();
+            wechatImg.src = 'https://i.ibb.co/HT19Gdby/wechat-qr.jpg';
+            
+            const whatsappImg = new Image();
+            whatsappImg.src = 'https://i.ibb.co/W4TzvRBT/whatsapp-qr.jpg';
         });
     </script>
 </body>
